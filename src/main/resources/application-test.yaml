@@ -6,7 +6,7 @@ open-weather:
 resilience4j.ratelimiter:
   configs:
     default:
-      limitForPeriod: 20
+      limitForPeriod: 10
       limitRefreshPeriod: 1m
       timeoutDuration: 2s
   instances:

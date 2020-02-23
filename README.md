@@ -104,9 +104,9 @@ localhost:8080/actuator/metrics/
 * Rate limiter is configured to allow 10000 calls in 24h
 * For Testing its configured to have 10 calls in 1m
 * Configuration are defined in application.yaml
-* After rate limit is reached exception with message "" is thrown
+* After rate limit is reached exception with message "RateLimiter 'openWeather' does not permit further calls" is thrown
+* Test: com.bhanuchaddha.integration.openweatherapiintegration.ResilienceTest.callingService11TimeReturnRateLimiterError
 * Metrics of rate limiter can be observed as below
-* test: com.bhanuchaddha.integration.openweatherapiintegration.ResilienceTest.callingService11TimeReturnRateLimiterError
 ```json
 localhost:8080/actuator/metrics/resilience4j.ratelimiter.available.permissions
 
@@ -132,7 +132,7 @@ localhost:8080/actuator/metrics/resilience4j.ratelimiter.available.permissions
 
 ``` 
 ## CircuitBreaker, Bulkhead, Retry, TimeLimiter
-* Similar to rate limiter other resilience configuration with just annotation and configuration file
+* Similar to rate limiter other resilience configuration can be enabled using annotations and configuration file
 
 ## Run Service
 
@@ -155,4 +155,4 @@ mvn test
 
 * com.bhanuchaddha.integration.openweatherapiintegration.integration.common.RestIntegrationAdapter
 
-* OpenWeatherAPIRestIntegration is use RestIntegrationAdapter.
+* OpenWeatherAPIRestIntegration uses RestIntegrationAdapter.
