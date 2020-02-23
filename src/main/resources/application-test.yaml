@@ -1,0 +1,53 @@
+logging.level.com.bhanuchaddha.integration.openweatherapiintegration: DEBUG
+open-weather:
+  api:
+    key:
+
+resilience4j.ratelimiter:
+  configs:
+    default:
+      limitForPeriod: 20
+      limitRefreshPeriod: 1m
+      timeoutDuration: 2s
+  instances:
+    openWeather:
+      baseConfig: default
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      failureRateThreshold: 10
+      slowCallRateThreshold: 10
+      slowCallDurationThreshold : 6000
+      slidingWindowType: COUNT_BASED
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 5
+  instances:
+    openWeather:
+      baseConfig: default
+      recordExceptions: com.bhanuchaddha.integration.openweatherapiintegration.error.exception.ServiceException
+
+resilience4j.retry:
+  configs:
+    default:
+      maxRetryAttempts: 3
+      waitDuration: 10s
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+  instances:
+    openWeather:
+      baseConfig: default
+
+resilience4j.bulkhead:
+  configs:
+    default:
+      maxConcurrentCalls: 3
+  instances:
+    openWeather:
+      baseConfig: default
+
+resilience4j.timelimiter:
+  instances:
+    openWeather:
+      timeoutDuration: 2s
+
